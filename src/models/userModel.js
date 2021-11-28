@@ -8,6 +8,8 @@ const create = async (name, email, password, role) => {
   return userCreated;
 };
 
+
+
 module.exports = {
   create,
 };
