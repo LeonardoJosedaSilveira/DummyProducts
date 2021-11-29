@@ -1,6 +1,6 @@
 const md5 = require('md5');
 const validator = require('validator');
-const { create, findUser } = require('../models/userModel');
+const { create, findUser, update } = require('../models/userModel');
 
 const errorResponse = { status: 400, message: 'Invalid entries. Try again.' };
 const weakPassword = { status: 400, message: 'Weak password' };
@@ -75,6 +75,16 @@ const newUser = async (userInfo) => {
   return { name, email, role: 'customer'};
 };
 
+const updateUser = async ({oldEmail, name, newEmail}) => {
+  const selectUser = await findUser(oldEmail);
+  console.log(selectUser)
+  const { _id } = selectUser;
+  const result = await update(name, newEmail, _id);
+
+  return result;
+};
+
 module.exports = {
   newUser,
+  updateUser
 };

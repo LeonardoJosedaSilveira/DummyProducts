@@ -10,8 +10,8 @@ module.exports = async (receivedToken) => {
   const selectUser = await findUser(email);
   const emailNotFound = { status: 401, message: 'Expired or invalid token' };
   if (!selectUser) throw emailNotFound;
-
-  const { password, ...nopass } = selectUser.dataValues;
+  
+  const { password, ...nopass } = selectUser;
 
   return nopass;
 };
