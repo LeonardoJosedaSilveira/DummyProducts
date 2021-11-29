@@ -1,4 +1,4 @@
-# API DummyProducts
+# API arkosfoods-api
 
 ## Descrição
   Uma API para fornecer aos usuário acesso a uma lista de produtos com preço e demais dados.
@@ -40,14 +40,14 @@
 ├── tests
 |   └── createUsers.test.js
 ├── README.md
-└── dummyProductsDocumentation.md
+└── arkosFoodsApiDocumentation.md
 ```
 
 # Documentação
 
-[dummyProducts Documentation](./dummyProductsDocumentation.md)
+[arkosfoods API Documentation](./arkosFoodsApiDocumentation.md)
 
 ou 
 
 
-https://documenter.getpostman.com/view/18568281/UVJcmx6d#f630d146-4d8d-4705-93de-ed4597c78557
+https://documenter.getpostman.com/view/18568281/UVJcmx6d

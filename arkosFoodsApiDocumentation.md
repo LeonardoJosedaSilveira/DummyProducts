@@ -1,4 +1,4 @@
-# API DummyProducts
+# API arkosfoods-api
 
 - - -
 >**`POST /user/register`** 
