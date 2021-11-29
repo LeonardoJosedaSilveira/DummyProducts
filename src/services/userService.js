@@ -1,41 +1,80 @@
-// const jwt = require('jsonwebtoken');
-const userModel = require('../models/userModel');
+const md5 = require('md5');
+const validator = require('validator');
+const { create, findUser } = require('../models/userModel');
 
-const err = {
-  message: ' ',
+const errorResponse = { status: 400, message: 'Invalid entries. Try again.' };
+const weakPassword = { status: 400, message: 'Weak password' };
+
+const validFilds = (userInfo) => {
+  const fields = ['name', 'email', 'password'];
+  let index = 0;
+
+  for (const value in userInfo) {
+    if (value != fields[index]) throw errorResponse;
+    index += 1;
+  };
 };
 
-// const checkEmail = (email) => {
-//   const regex = RegExp(/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/).test(email);
-//   if (!regex || !email) return err;
-// };
+const emptyValues = (userInfo) => {
+  for (const value in userInfo) {
+    const empty = validator.isEmpty(userInfo[value])
+    if (empty) throw errorResponse;
+  };
+};
 
-// const checkEmailExist = async (email) => {
-//   const emailChecked = await userModel.findEmail(email);
-//   if (emailChecked) {
-//     err.message = 'Email already registered';
-//     return err;
-//   }
-// };
+const validValues = async (userInfo) => {
+  const { name, email, password } = userInfo;
 
-const createUser = async (name, email, password) => {
-  if (!name) return err;
+  emptyValues(userInfo);
+  validName(name);
+  validPassword(password);
+  await validEmail(email);
+};
 
-  // const validEmail = checkEmail(email);
-  // if (validEmail) return validEmail;
+const validEmail = async (email) => {
+  const emailOk = validator.isEmail(email);
+  if (!emailOk) throw errorResponse;
 
-  // const consultEmail = await checkEmailExist(email);
-  // if (consultEmail) return consultEmail;
+  const emailExist = await findUser(email);
+  if (emailExist) throw errorResponse;
+};
 
-  const role = 'user';
-  const newUser = await userModel.create(name, email, password, role);
-  
-  const user = newUser;
-  delete user.password;
+const validPassword = (password) => {
+  const strongPassword = validator.isStrongPassword(password);
+  if (!strongPassword) throw weakPassword;
+};
 
-  return { user };
+const validName = (name) => {
+  const options = {ignore: ' '};
+  const alphaName = validator.isAlpha(name, 'pt-BR', options);
+  if (!alphaName) throw errorResponse;
+};
+
+const createUser = async ({ name, email, password }) => {
+  const encriptedPassword = md5(password);
+  const role = 'customer';
+
+  const register = await create(
+    name,
+    email,
+    encriptedPassword,
+    role
+  );
+
+  return register;
+};
+
+const newUser = async (userInfo) => {
+  validFilds(userInfo);
+
+  const { name, email } = userInfo;
+
+  await validValues(userInfo);
+  await createUser(userInfo);
+
+  return { name, email, role: 'customer'};
 };
 
 module.exports = {
-  createUser,
+  newUser,
 };

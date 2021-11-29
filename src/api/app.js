@@ -8,7 +8,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use('/user', userRoute)
+app.use('/user', userRoute);
 
 app.use((err, _req, res, _next) => {
   console.log(err);

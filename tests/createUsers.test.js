@@ -9,7 +9,7 @@ const { MongoMemoryServer } = require('mongodb-memory-server');
 chai.use(chaiHttp);
 const { expect } = chai;
 
-describe('1 - rota /user', () => {
+describe('1 - rota /user/register', () => {
   describe('1.1 ----- Registro do usuario - ok', () => {
     let response = {};
     const DBServer = new MongoMemoryServer();
@@ -22,18 +22,18 @@ describe('1 - rota /user', () => {
       .resolves(connectionMock);
 
       response = await chai.request(server)
-          .post('/user')
+          .post('/user/register')
           .send({
-              name: 'jane',
-              password: 'senha123',
-              email: 'treta@mil.vich'
-          })
+              name: 'Vrawnilsom',
+              email: 'Teste@test.teste',
+              password: 'Wraw251$#'
+          });
     });
 
     after(async () => {
         MongoClient.connect.restore();
         await DBServer.stop();
-    })
+    });
 
     it('Retorna um objeto', () => {
       expect(response.body).to.be.a('object');
@@ -44,15 +44,17 @@ describe('1 - rota /user', () => {
     });
 
     it('Retorna o código de status 201', () => {
-      expect(response).to.have.status(201);
+      expect(response.status).to.equal(201);
+    });
+
+    it('A propriedade "role" é igual a "customer"', () => {
+      expect(response.body.user.role).to.be.equal('customer');
     });
 
     it('A propriedade "message" possui o texto "User created successfully"',
       () => {
-        expect(response.body.message)
-          .to.be.equal('User created successfully');
+        expect(response.body.message).to.be.equal('User created successfully');
      });
-    
   });
 
   describe('1.2 ----- Registro do usuario - campos vazios', () => {
@@ -70,18 +72,18 @@ describe('1 - rota /user', () => {
     after(async () => {
         MongoClient.connect.restore();
         await DBServer.stop();
-    })
+    });
 
     describe('1.2.1 _ name', () => {
       it('Retorna o código de status 400',async () => {
         response = await chai.request(server)
-          .post('/user')
+          .post('/user/register')
           .send({
               name: '',
-              password: 'senha123',
+              password: 'Wraw251$#',
               email: 'treta@mil.vich'
         });
-        expect(response).to.have.status(400);
+        expect(response.status).to.equal(400);
       });
   
       it('A propriedade "message" possui o texto "Invalid entries. Try again."',
@@ -89,18 +91,18 @@ describe('1 - rota /user', () => {
           expect(response.body.message)
             .to.be.equal('Invalid entries. Try again.');
        });
-    })
+    });
 
     describe('1.2.2 _ password', () => {
       it('Retorna o código de status 400',async () => {
         response = await chai.request(server)
-          .post('/user')
+          .post('/user/register')
           .send({
               name: 'vranilson',
               password: '',
               email: 'treta@mil.vich'
         });
-        expect(response).to.have.status(400);
+        expect(response.status).to.equal(400);
       });
   
       it('A propriedade "message" possui o texto "Invalid entries. Try again."',
@@ -108,18 +110,18 @@ describe('1 - rota /user', () => {
           expect(response.body.message)
             .to.be.equal('Invalid entries. Try again.');
        });
-    })
+    });
 
-    describe('1.2.3 _ email', () => {
+    describe('1.2.3 _ email',async () => {
       it('Retorna o código de status 400',async () => {
         response = await chai.request(server)
-          .post('/user')
+          .post('/user/register')
           .send({
               name: 'vranilson',
-              password: 'asdf2301as',
+              password: 'Wraw251$#',
               email: ''
         });
-        expect(response).to.have.status(400);
+        expect(response.status).to.equal(400);
       });
   
       it('A propriedade "message" possui o texto "Invalid entries. Try again."',
@@ -127,8 +129,7 @@ describe('1 - rota /user', () => {
           expect(response.body.message)
             .to.be.equal('Invalid entries. Try again.');
        });
-    })
-  
+    });
   });
 
   describe('1.3 ----- Registro do usuario - campos errados', () => {
@@ -146,18 +147,18 @@ describe('1 - rota /user', () => {
     after(async () => {
         MongoClient.connect.restore();
         await DBServer.stop();
-    })
+    });
 
     describe('1.3.1 _ name', () => {
       it('Retorna o código de status 400',async () => {
         response = await chai.request(server)
-          .post('/user')
+          .post('/user/register')
           .send({
               nae: 'vrawmerson',
-              password: 'senha123',
+              password: 'Wraw251$#',
               email: 'treta@mil.vich'
         });
-        expect(response).to.have.status(400);
+        expect(response.status).to.equal(400);
       });
   
       it('A propriedade "message" possui o texto "Invalid entries. Try again."',
@@ -165,18 +166,18 @@ describe('1 - rota /user', () => {
           expect(response.body.message)
             .to.be.equal('Invalid entries. Try again.');
        });
-    })
+    });
 
     describe('1.3.2 _ password', () => {
       it('Retorna o código de status 400',async () => {
         response = await chai.request(server)
-          .post('/user')
+          .post('/user/register')
           .send({
               name: 'vranilson',
               pssword: 'asdf123423',
               email: 'treta@mil.vich'
         });
-        expect(response).to.have.status(400);
+        expect(response.status).to.equal(400);
       });
   
       it('A propriedade "message" possui o texto "Invalid entries. Try again."',
@@ -184,18 +185,18 @@ describe('1 - rota /user', () => {
           expect(response.body.message)
             .to.be.equal('Invalid entries. Try again.');
        });
-    })
+    });
 
     describe('1.3.3 _ email', () => {
       it('Retorna o código de status 400',async () => {
         response = await chai.request(server)
-          .post('/user')
+          .post('/user/register')
           .send({
               name: 'vranilson',
-              password: 'asdf2301as',
+              password: 'Wraw251$#',
               emal: 'vraw@vraw.vraw'
         });
-        expect(response).to.have.status(400);
+        expect(response.status).to.equal(400);
       });
   
       it('A propriedade "message" possui o texto "Invalid entries. Try again."',
@@ -203,8 +204,7 @@ describe('1 - rota /user', () => {
           expect(response.body.message)
             .to.be.equal('Invalid entries. Try again.');
        });
-    })
-  
+    });
   });
 
   describe('1.4 ----- Registro do usuario - dados invalidos', () => {
@@ -222,18 +222,18 @@ describe('1 - rota /user', () => {
     after(async () => {
         MongoClient.connect.restore();
         await DBServer.stop();
-    })
+    });
 
     describe('1.4.1 _ name', () => {
       it('Retorna o código de status 400',async () => {
         response = await chai.request(server)
-          .post('/user')
+          .post('/user/register')
           .send({
-              name: 'aa',
-              password: 'senha123',
+              name: ' aa',
+              password: 'Wraw251$#',
               email: 'treta@mil.vich'
         });
-        expect(response).to.have.status(400);
+        expect(response.status).to.equal(400);
       });
   
       it('A propriedade "message" possui o texto "Invalid entries. Try again."',
@@ -241,37 +241,37 @@ describe('1 - rota /user', () => {
           expect(response.body.message)
             .to.be.equal('Invalid entries. Try again.');
        });
-    })
+    });
 
     describe('1.4.2 _ password', () => {
       it('Retorna o código de status 400',async () => {
         response = await chai.request(server)
-          .post('/user')
+          .post('/user/register')
           .send({
               name: 'vranilson',
-              password: 'a',
-              email: 'treta@mil.vich'
+              email: 'treta@mil.vich',
+              password: 'a'
         });
-        expect(response).to.have.status(400);
+        expect(response.status).to.equal(400);
       });
   
-      it('A propriedade "message" possui o texto "Invalid entries. Try again."',
+      it('A propriedade "message" possui o texto "Weak password"',
         () => {
           expect(response.body.message)
-            .to.be.equal('Invalid entries. Try again.');
+            .to.be.equal('Weak password');
        });
-    })
+    });
 
     describe('1.4.3 _ email', () => {
       it('Retorna o código de status 400',async () => {
         response = await chai.request(server)
-          .post('/user')
+          .post('/user/register')
           .send({
               name: 'vranilson',
-              password: 'asdf2301as',
-              email: 'vra.vraw'
+              email: 'aaaaa',
+              password: 'Wraw251$#'
         });
-        expect(response).to.have.status(400);
+        expect(response.status).to.equal(400);
       });
   
       it('A propriedade "message" possui o texto "Invalid entries. Try again."',
@@ -279,8 +279,7 @@ describe('1 - rota /user', () => {
           expect(response.body.message)
             .to.be.equal('Invalid entries. Try again.');
        });
-    })
+    });
   
   });
-
 });
