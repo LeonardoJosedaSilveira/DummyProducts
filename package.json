@@ -1,5 +1,5 @@
 {
-  "name": "dummyproducts",
+  "name": "arkosfoods-api",
   "version": "1.0.0",
   "description": "",
   "main": "./src/api/server.js",
@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LeonardoJosedaSilveira/DummyProducts.git"
+    "url": "git+https://github.com/LeonardoJosedaSilveira/arkosfoods-api.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/LeonardoJosedaSilveira/DummyProducts/issues"
+    "url": "https://github.com/LeonardoJosedaSilveira/arkosfoods-api/issues"
   },
-  "homepage": "https://github.com/LeonardoJosedaSilveira/DummyProducts#readme",
+  "homepage": "https://github.com/LeonardoJosedaSilveira/arkosfoods-api#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
