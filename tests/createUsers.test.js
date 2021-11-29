@@ -24,9 +24,9 @@ describe('1 - rota /user/register', () => {
       response = await chai.request(server)
           .post('/user/register')
           .send({
-              name: 'Vrawnilsom',
-              email: 'Teste@test.teste',
-              password: 'Wraw251$#'
+            name: 'Vrawnilsom',
+            email: 'Teste@test.teste',
+            password: 'Wraw251$#'
           });
     });
 
@@ -79,9 +79,9 @@ describe('1 - rota /user/register', () => {
         response = await chai.request(server)
           .post('/user/register')
           .send({
-              name: '',
-              password: 'Wraw251$#',
-              email: 'treta@mil.vich'
+            name: '',
+            password: 'Wraw251$#',
+            email: 'treta@mil.vich'
         });
         expect(response.status).to.equal(400);
       });
@@ -98,9 +98,9 @@ describe('1 - rota /user/register', () => {
         response = await chai.request(server)
           .post('/user/register')
           .send({
-              name: 'vranilson',
-              password: '',
-              email: 'treta@mil.vich'
+            name: 'vranilson',
+            password: '',
+            email: 'treta@mil.vich'
         });
         expect(response.status).to.equal(400);
       });
@@ -117,9 +117,9 @@ describe('1 - rota /user/register', () => {
         response = await chai.request(server)
           .post('/user/register')
           .send({
-              name: 'vranilson',
-              password: 'Wraw251$#',
-              email: ''
+            name: 'vranilson',
+            password: 'Wraw251$#',
+            email: ''
         });
         expect(response.status).to.equal(400);
       });
@@ -154,9 +154,9 @@ describe('1 - rota /user/register', () => {
         response = await chai.request(server)
           .post('/user/register')
           .send({
-              nae: 'vrawmerson',
-              password: 'Wraw251$#',
-              email: 'treta@mil.vich'
+            nae: 'vrawmerson',
+            password: 'Wraw251$#',
+            email: 'treta@mil.vich'
         });
         expect(response.status).to.equal(400);
       });
@@ -173,9 +173,9 @@ describe('1 - rota /user/register', () => {
         response = await chai.request(server)
           .post('/user/register')
           .send({
-              name: 'vranilson',
-              pssword: 'asdf123423',
-              email: 'treta@mil.vich'
+            name: 'vranilson',
+            pssword: 'asdf123423',
+            email: 'treta@mil.vich'
         });
         expect(response.status).to.equal(400);
       });
@@ -192,9 +192,9 @@ describe('1 - rota /user/register', () => {
         response = await chai.request(server)
           .post('/user/register')
           .send({
-              name: 'vranilson',
-              password: 'Wraw251$#',
-              emal: 'vraw@vraw.vraw'
+            name: 'vranilson',
+            password: 'Wraw251$#',
+            emal: 'vraw@vraw.vraw'
         });
         expect(response.status).to.equal(400);
       });
@@ -229,9 +229,9 @@ describe('1 - rota /user/register', () => {
         response = await chai.request(server)
           .post('/user/register')
           .send({
-              name: ' aa',
-              password: 'Wraw251$#',
-              email: 'treta@mil.vich'
+            name: ' aa',
+            password: 'Wraw251$#',
+            email: 'treta@mil.vich'
         });
         expect(response.status).to.equal(400);
       });
@@ -248,9 +248,9 @@ describe('1 - rota /user/register', () => {
         response = await chai.request(server)
           .post('/user/register')
           .send({
-              name: 'vranilson',
-              email: 'treta@mil.vich',
-              password: 'a'
+            name: 'vranilson',
+            email: 'treta@mil.vich',
+            password: 'a'
         });
         expect(response.status).to.equal(400);
       });
@@ -267,9 +267,9 @@ describe('1 - rota /user/register', () => {
         response = await chai.request(server)
           .post('/user/register')
           .send({
-              name: 'vranilson',
-              email: 'aaaaa',
-              password: 'Wraw251$#'
+            name: 'vranilson',
+            email: 'aaaaa',
+            password: 'Wraw251$#'
         });
         expect(response.status).to.equal(400);
       });
