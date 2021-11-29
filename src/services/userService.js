@@ -17,7 +17,7 @@ const validFilds = (userInfo) => {
 
 const emptyValues = (userInfo) => {
   for (const value in userInfo) {
-    const empty = validator.isEmpty(userInfo[value])
+    const empty = validator.isEmpty(userInfo[value]);
     if (empty) throw errorResponse;
   };
 };
@@ -77,7 +77,6 @@ const newUser = async (userInfo) => {
 
 const updateUser = async ({oldEmail, name, newEmail}) => {
   const selectUser = await findUser(oldEmail);
-  console.log(selectUser)
   const { _id } = selectUser;
   const result = await update(name, newEmail, _id);
 

@@ -6,7 +6,7 @@ const secret = process.env.SECRET;
 
 module.exports = async (receivedToken) => {
   const decode = jwt.verify(receivedToken, secret);
-  const { email } = decode
+  const { email } = decode;
   const selectUser = await findUser(email);
   const emailNotFound = { status: 401, message: 'Expired or invalid token' };
   if (!selectUser) throw emailNotFound;

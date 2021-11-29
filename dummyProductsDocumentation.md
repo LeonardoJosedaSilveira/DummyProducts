@@ -5,8 +5,8 @@
 ```
 Registrando um usuário — e-mail valido e uma senha de no minemo 6 dígitos e um user name.
 {
-  "name": "nome do usuario",
-  "email": "email",
+  "name": "nome do usuário",
+  "email": "e-mail",
   "password": "senha"
 }
 
@@ -14,8 +14,8 @@ retorna
 - status 201 - created
 {
     "user": {
-        "name": "nome de usuario",
-        "email": "email",
+        "name": "nome de usuário",
+        "email": "e-mail",
         "role": "customer"
     },
     "message": "User created successfully"
@@ -37,15 +37,15 @@ or
 ```
 Efetuando o login — e-mail valido e uma senha de no minemo 6 dígitos previamente cadastrados.
 {
-  "email": "email",
+  "email": "e-mail",
   "password": "senha"
 }
 
 retorna
 - status 200 - ok
 {
-  "name": "nome do usuario",
-  "email": "email",
+  "name": "nome do usuário",
+  "email": "e-mail",
   "role": "customer",            
   "token": "um token valido"
 }
@@ -58,11 +58,16 @@ retorna
 - - -
 >**`PUT /user/update`** 
 ```
-Atualizando dados do usuario — e-mail e nome - requequer token valido enviado pelo header Authorization
+Atualizando dados do usuário — e-mail e nome - requer token valido enviado pelo header Authorization
+
+'headers': {
+    'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiemUgZmlybWlubyIsImVtYWlsIjoidG9kZGRAZ21haWwuY29tIiwicm9sZSI6ImN1c3RvbWVyIiwiaWF0IjoxNjM4MjAyMTkxLCJleHAiOjE2MzgyMDU3OTF9.8pg4LhGld4B5RrwHhuonBILU5FMt0z0LLG7BZTGwDLM'
+}
+
 body.
 {
-  "oldEmail": "email atual",
-  "name": "nome do usuario",
+  "oldEmail": "e-mail atual",
+  "name": "nome do usuário",
   "newEmail": "novo e-mail"
 }
 
@@ -81,6 +86,9 @@ retorna
 ```
 Buscando todos os produtos recebem — um token valido pelo Header Authorization.
 
+'headers': {
+    'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiemUgZmlybWlubyIsImVtYWlsIjoidG9kZGRAZ21haWwuY29tIiwicm9sZSI6ImN1c3RvbWVyIiwiaWF0IjoxNjM4MjAyMTkxLCJleHAiOjE2MzgyMDU3OTF9.8pg4LhGld4B5RrwHhuonBILU5FMt0z0LLG7BZTGwDLM'
+}
 
 retorna
 - status 200 - ok
@@ -125,6 +133,10 @@ retorna
 >**`GET /images/"image_name.jpg"`** 
 ```
 Buscando imagem do produto pelo nome recebe — um token valido pelo Header Authorization.
+
+'headers': {
+    'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiemUgZmlybWlubyIsImVtYWlsIjoidG9kZGRAZ21haWwuY29tIiwicm9sZSI6ImN1c3RvbWVyIiwiaWF0IjoxNjM4MjAyMTkxLCJleHAiOjE2MzgyMDU3OTF9.8pg4LhGld4B5RrwHhuonBILU5FMt0z0LLG7BZTGwDLM'
+}
 
 retorna
 - status 200 - ok

@@ -7,7 +7,7 @@ const createNewUser = async (req, res, next) => {
     const user = await userService.newUser(req.body);
     return res.status(stateCreated).json({ user, message: 'User created successfully'});
   } catch (error) {
-    return next(error)
+    return next(error);
   };
 };
 
@@ -18,7 +18,7 @@ const updateSaleStatus = async (req, res, next) => {
     return res.status(200).json({ message: 'Update successful' });
   } catch (error) {
     return next(error);
-  }
+  };
 };
 
 module.exports = {

@@ -6,7 +6,7 @@ const newLogin = async (req, res, next) => {
     return res.status(200).json(logedUser);
   } catch (error) {
     return next(error);
-  }
+  };
 };
 
 module.exports = {
